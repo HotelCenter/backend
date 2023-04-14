@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ]
     ],
 
     /*
@@ -69,6 +73,8 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+            PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider::class,
+
     ],
 
     /*
