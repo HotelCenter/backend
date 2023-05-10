@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom'
 import '../style/header/style.css'
+import { LANGUAGES } from '../constants'
+import i18next from 'i18next'
 export default function Header({Navbar}) {
+    
+    const languageSelectionHandler=({target})=>{
+        i18next.changeLanguage(target.value)
+    }
     return (
         <header className="bg-main p-3">
                 <nav className="navbar navbar-expand-lg">
@@ -11,6 +17,15 @@ export default function Header({Navbar}) {
                         </button>
                         <Navbar/>
                         
+                    </div>
+                    <div>
+                        <select onChange={languageSelectionHandler}>
+                            {
+                                LANGUAGES.map((lng)=>(
+                                    <option key={lng.code} value={lng.code}>{lng.label}</option>
+                                ))
+                            }
+                        </select>
                     </div>
                 </nav>
         </header>

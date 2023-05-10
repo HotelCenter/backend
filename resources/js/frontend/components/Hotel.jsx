@@ -5,6 +5,7 @@ import * as THREE from 'three'
 export default function Hotel() {
   const obj = useRef()
   const hotel = useGLTF('./hotel.glb')
+  
   const hotelPosition=useControls({hotelPosition:folder({
     x:{
       min: -10,

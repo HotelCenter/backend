@@ -16,7 +16,7 @@ export default function LogIn() {
     }).then((res)=>{
       const {data}=res
       Cookies.set('access_token',data.access_token,{expires:data.expires_in})
-      navigate('/profile')
+      navigate('/me')
     })
   }
   return (

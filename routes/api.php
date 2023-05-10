@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -20,3 +22,6 @@ Route::post('logout','logout');
 Route::post('refresh','refresh');
 Route::post('me','me');
 })->middleware('api')->prefix('auth');
+
+Route::resource('hotels',HotelController::class);
+Route::resource('rooms',RoomController::class);

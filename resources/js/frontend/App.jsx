@@ -1,23 +1,25 @@
 import './style/common.css'
-import axios from 'axios'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './routes/Home';
+import Home, { hotelsLoader } from './routes/Home';
 import Root from './routes/Root';
 import About from './routes/About';
 import Aide from './routes/Aide';
 import LogIn from './routes/LogIn';
 import SignUp from './routes/SignUp';
-import { useEffect } from 'react';
-import Cookies from 'js-cookie';
-import Profile from './routes/Profile';
-const router = createBrowserRouter([
+import React, { lazy } from 'react';
+import { Profile, profileLoader } from './routes/me';
+
+const router = createBrowserRouter(
+  [
   {
     path: '/',
     element: <Root />,
     children: [
       {
-        path: '/',
         element: <Home />,
+        index:true,
+        loader:hotelsLoader,
+        path:'/'
       },
       {
 
@@ -26,8 +28,9 @@ const router = createBrowserRouter([
       },
       {
 
-        path: '/profile',
-        element: <Profile />
+        path: '/me',
+        loader:profileLoader,
+        element:<Profile/>
       },
       {
 
@@ -52,7 +55,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <RouterProvider fallbackElement={<h1>...Loading</h1>} router={router} />
   );
 }
 
