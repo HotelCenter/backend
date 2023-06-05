@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/{path?}','react')->where('path','(?<!api|auth)(.+)');
+// Route::view('/{path?}','react')->where('path','(?<!api|auth)(.+)');

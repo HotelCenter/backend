@@ -5,6 +5,7 @@ use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,13 +16,14 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::controller(AuthController::class)->group(function(){
-Route::post('login','login');
-Route::post('register','register');
-Route::post('logout','logout');
-Route::post('refresh','refresh');
-Route::post('me','me');
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
+    Route::post('me', 'me');
+    Route::post('authenticated', 'authenticated');
 })->middleware('api')->prefix('auth');
 
-Route::resource('hotels',HotelController::class);
-Route::resource('rooms',RoomController::class);
+Route::resource('hotels', HotelController::class);
+Route::resource('rooms', RoomController::class);
