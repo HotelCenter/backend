@@ -1,7 +1,0 @@
-.bg-main{
-    background: var(--main-color);
-}
-
-.navbar .activeLink{
-    color:var(--secondary-color);
-}
