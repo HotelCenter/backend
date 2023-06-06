@@ -18,6 +18,7 @@ class HotelController extends Controller
     public function index()
     {
         $hotels = Hotel::orderByDesc('rating')->take(10)->get();
+        sleep(5);
         return response()->json($hotels);
     }
     public function getHotelsByFilters(Request $request)
