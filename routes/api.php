@@ -26,5 +26,6 @@ Route::controller(AuthController::class)->group(function () {
 })->middleware('api')->prefix('auth');
 
 Route::get('hotels/filter/', [HotelController::class, 'getHotelsByFilters']);
+Route::get('hotels/rooms/{hotel}', [HotelController::class, 'getRoomsByHotel']);
 Route::resource('hotels', HotelController::class);
 Route::resource('rooms', RoomController::class);
