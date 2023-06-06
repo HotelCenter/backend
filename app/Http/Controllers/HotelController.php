@@ -27,7 +27,10 @@ class HotelController extends Controller
             "children" => "integer|min:0|required",
             "rooms" => "integer|min:1|required",
             "adults" => "integer|min:1|required",
-            "destination" => "string|required"
+            "destination" => "string|required",
+            "checkindate" => "date|required|after_or_equal:today",
+            "checkoutdate" => "date|required|after_or_equal:tomorrow",
+
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
@@ -37,12 +40,13 @@ class HotelController extends Controller
         $rooms_count = $validated['rooms'];
         $children = $validated['children'];
         $adults = $validated['adults'];
+        $checkindate = $validated['checkindate'];
         $hotels_query = Hotel::where('city', 'like', '%' . $destination . '%')->
             orWhere('country', 'like', '%' . $destination . '%')->get();
         $hotels = [];
         $rooms = [];
         foreach ($hotels_query as $hotel) {
-            $filtered_rooms = $hotel->rooms()->where('is_available', true)->where('minimum_children', '>=', $children)->where('minimum_adults', '>=', $adults);
+            $filtered_rooms = $hotel->rooms()->where('date_available', "<=", $checkindate)->where('minimum_children', '>=', $children)->where('minimum_adults', '>=', $adults);
             if ($filtered_rooms->count() >= $rooms_count) {
                 array_push($hotels, $hotel);
                 array_push($rooms, $filtered_rooms->get());
