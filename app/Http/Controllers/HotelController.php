@@ -83,10 +83,14 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-
         return response()->json($hotel);
     }
 
+    public function getRoomsByHotel(Hotel $hotel)
+    {
+        $rooms = $hotel->rooms()->orderBy("date_available")->get();
+        return response()->json($rooms);
+    }
     /**
      * Show the form for editing the specified resource.
      *
