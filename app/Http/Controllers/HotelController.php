@@ -44,15 +44,13 @@ class HotelController extends Controller
         $hotels_query = Hotel::where('city', 'like', '%' . $destination . '%')->
             orWhere('country', 'like', '%' . $destination . '%')->get();
         $hotels = [];
-        $rooms = [];
         foreach ($hotels_query as $hotel) {
             $filtered_rooms = $hotel->rooms()->where('date_available', "<=", $checkindate)->where('minimum_children', '>=', $children)->where('minimum_adults', '>=', $adults);
             if ($filtered_rooms->count() >= $rooms_count) {
                 array_push($hotels, $hotel);
-                array_push($rooms, $filtered_rooms->get());
             }
         }
-        return response()->json(['hotels' => $hotels, 'rooms' => $rooms]);
+        return response()->json($hotels);
     }
     /**
      * Show the form for creating a new resource.
