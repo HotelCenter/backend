@@ -17,7 +17,8 @@ class RoomFactory extends Factory
     public function definition()
     {
         return [
-            'is_available' => fake()->boolean(),
+            'date_available' => fake()->dateTimeBetween("now", "+5 months"),
+            'date_booked' => fake()->dateTimeBetween("-5 months", "now"),
             'minimum_children' => fake()->numberBetween(0, 10),
             'minimum_adults' => fake()->numberBetween(1, 10),
             'base_price' => fake()->randomFloat(2, 100, 500),

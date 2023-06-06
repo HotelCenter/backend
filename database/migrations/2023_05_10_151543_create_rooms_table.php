@@ -14,7 +14,8 @@ return new class extends Migration {
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_available')->default(true);
+            $table->date('date_available');
+            $table->date('date_booked');
             $table->integer('minimum_children');
             $table->integer('minimum_adults');
             $table->double('base_price');
