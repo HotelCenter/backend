@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Hotel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +28,7 @@ class RoomFactory extends Factory
             'taxes' => fake()->randomFloat(2, 0, 10),
             'discount' => fake()->randomFloat(2, 0, 100),
             'characteristics' => fake()->text(),
-            'hotel_id' => fake()->randomNumber(1, 50)
+            'hotel_id' => Hotel::factory()
         ];
     }
 }
