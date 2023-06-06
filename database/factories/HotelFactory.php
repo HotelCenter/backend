@@ -16,18 +16,19 @@ class HotelFactory extends Factory
      */
     public function definition()
     {
-        $name=fake()->unique()->name();
+        $name = fake()->unique()->name();
         return [
-            'user_id'=>fake()->numberBetween(1,10),
-            'name'=>$name,
-            'address'=>fake()->address(),
-            'city'=>fake()->city(),
-            'country'=>fake()->country(),
-            'phone_number'=>fake()->phoneNumber(),
-            'description'=>fake()->text(),
-            'rating'=>fake()->randomFloat(1,0,5),
-            'image'=>fake()->randomElement(['1.jpeg','2.jpeg','3.jpeg','4.jpeg']),
-            'slug'=>str_replace(' ','_',$name)
+            'user_id' => fake()->numberBetween(1, 10),
+            'name' => $name,
+            'address' => fake()->address(),
+            'city' => fake()->city(),
+            'postcode' => fake()->postcode(),
+            'country' => fake()->country(),
+            'phone_number' => fake()->phoneNumber(),
+            'description' => fake()->text(),
+            'rating' => fake()->randomFloat(1, 0, 5),
+            'image' => fake()->randomElement(['1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg']),
+            'slug' => str_replace(' ', '_', $name)
         ];
     }
 }

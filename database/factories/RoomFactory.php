@@ -17,14 +17,16 @@ class RoomFactory extends Factory
     public function definition()
     {
         return [
-            'is_available'=>fake()->boolean(),
-            'base_price'=>fake()->randomFloat(2,100,500),
-            'adult_price'=>fake()->randomFloat(2,100,500),
-            'child_price'=>fake()->randomFloat(2,100,500),
-            'taxes'=>fake()->randomFloat(2,0,10),
-            'discount'=>fake()->randomFloat(2,0,100),
-            'characteristics'=>fake()->text(),
-            'hotel_id'=>fake()->randomNumber(1,50)
+            'is_available' => fake()->boolean(),
+            'minimum_children' => fake()->numberBetween(0, 10),
+            'minimum_adults' => fake()->numberBetween(1, 10),
+            'base_price' => fake()->randomFloat(2, 100, 500),
+            'adult_price' => fake()->randomFloat(2, 100, 500),
+            'child_price' => fake()->randomFloat(2, 100, 500),
+            'taxes' => fake()->randomFloat(2, 0, 10),
+            'discount' => fake()->randomFloat(2, 0, 100),
+            'characteristics' => fake()->text(),
+            'hotel_id' => fake()->randomNumber(1, 50)
         ];
     }
 }
