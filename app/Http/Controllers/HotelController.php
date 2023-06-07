@@ -50,6 +50,7 @@ class HotelController extends Controller
                 array_push($hotels, $hotel);
             }
         }
+        sleep(5);
         return response()->json($hotels);
     }
     /**
