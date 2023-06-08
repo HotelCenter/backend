@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        $rooms = Room::all();
+        return response()->json($rooms);
     }
 
     /**
@@ -46,7 +49,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        //
+        return response()->json($room);
     }
 
     /**
