@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -16,10 +15,12 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('hotel_id')->references('id')->on('hotels');
             $table->foreignId('room_id')->references('id')->on('rooms');
-            $table->integer('adult_count');
-            $table->integer('children_count');
+            $table->unsignedInteger('adult_count');
+            $table->unsignedInteger('children_count');
+            $table->decimal('amount', 8, 2, true);
+            $table->date('checkin_date');
+            $table->date('checkout_date');
             $table->timestamps();
         });
     }

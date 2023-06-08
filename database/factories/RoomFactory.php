@@ -22,11 +22,11 @@ class RoomFactory extends Factory
             'date_booked' => fake()->dateTimeBetween("-5 months", "now"),
             'minimum_children' => fake()->numberBetween(0, 10),
             'minimum_adults' => fake()->numberBetween(1, 10),
-            'base_price' => fake()->randomFloat(2, 100, 500),
-            'adult_price' => fake()->randomFloat(2, 100, 500),
-            'child_price' => fake()->randomFloat(2, 100, 500),
-            'taxes' => fake()->randomFloat(2, 0, 10),
-            'discount' => fake()->randomFloat(2, 0, 100),
+            'base_price' => fake()->randomFloat(5, 100, 500),
+            'adult_price' => fake()->randomFloat(5, 50, 150),
+            'child_price' => fake()->randomFloat(5, 50, 100),
+            'taxes' => fake()->randomFloat(5, 0, 10),
+            'discount' => fake()->numberBetween(0, 25),
             'characteristics' => fake()->text(),
             'hotel_id' => Hotel::factory()
         ];
