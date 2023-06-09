@@ -21,6 +21,8 @@ return new class extends Migration {
             $table->decimal('amount', 8, 2, true);
             $table->date('checkin_date');
             $table->date('checkout_date');
+            $table->boolean('confirmed_payment')->default(false);
+
             $table->timestamps();
         });
     }

@@ -31,4 +31,5 @@ Route::get('hotels/rooms/{hotel}', [HotelController::class, 'getRoomsByHotel']);
 Route::resource('hotels', HotelController::class);
 Route::resource('rooms', RoomController::class);
 Route::resource('reservations', ReservationController::class);
+// Route::resource('reservations', ReservationController::class);
 Route::post('reservations/confirmpayment/{reservation}', [ReservationController::class, "updateConfirmedPayment"]);
