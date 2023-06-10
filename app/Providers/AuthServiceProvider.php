@@ -3,7 +3,14 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Hotel;
+use App\Models\Reservation;
+use App\Models\Room;
+use App\Policies\HotelPolicy;
+use App\Policies\ReservationPolicy;
+use App\Policies\RoomPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +20,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Hotel::class => HotelPolicy::class,
+        Room::class => RoomPolicy::class,
+        Reservation::class => ReservationPolicy::class,
     ];
 
     /**
@@ -24,7 +33,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
         //
     }
 }
