@@ -24,12 +24,14 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
     Route::post('me', 'me');
     Route::post('authenticated', 'authenticated');
+
 })->middleware('api')->prefix('auth');
 
 Route::get('hotels/filter/', [HotelController::class, 'getHotelsByFilters']);
 Route::get('hotels/rooms/{hotel}', [HotelController::class, 'getRoomsByHotel']);
-Route::resource('hotels', HotelController::class);
-Route::resource('rooms', RoomController::class);
-Route::resource('reservations', ReservationController::class);
-// Route::resource('reservations', ReservationController::class);
+Route::apiResource('hotels', HotelController::class);
+
+Route::apiResource('rooms', RoomController::class);
+Route::apiResource('reservations', ReservationController::class);
 Route::post('reservations/confirmpayment/{reservation}', [ReservationController::class, "updateConfirmedPayment"]);
+// Route::resource('reservations', ReservationController::class);
