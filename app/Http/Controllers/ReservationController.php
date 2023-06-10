@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaginateModel;
 use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\User;
@@ -19,20 +20,16 @@ class ReservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+        $this->authorizeResource(Reservation::class, 'reservation');
     }
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $response = PaginateModel::paginateAPI(
+            $request,
+            Reservation::count(),
+            Reservation::orderByDesc('created_at')
+        );
+        return response()->json($response);
     }
 
     /**
@@ -55,9 +52,9 @@ class ReservationController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json($validator->errors(), 422);
         }
-        $validated = $validator->validate();
+        $validated = $validator->validated();
         $checkin_date = Carbon::parse($validated['checkin_date'])->toDateTimeString();
         $checkout_date = Carbon::parse($validated['checkout_date'])->toDateTimeString();
         $validated = array_replace($validated, [
@@ -79,12 +76,6 @@ class ReservationController extends Controller
         $room->save();
         return response()->json($reservation);
     }
-    public function updateConfirmedPayment(Request $request, Reservation $reservation)
-    {
-        $reservation->confirmed_payment = true;
-        $reservation->save();
-        return response()->json($reservation);
-    }
     /**
      * Display the specified resource.
      *
@@ -93,18 +84,7 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Reservation  $reservation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Reservation $reservation)
-    {
-        //
+        return response()->json(["data" => $reservation]);
     }
 
     /**
@@ -116,6 +96,9 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
+        $reservation->confirmed_payment = true;
+        $reservation->save();
+
         return response()->json($reservation);
     }
 
@@ -127,6 +110,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return response()->json(["data" => ['message' => 'Reservation deleted successfully']]);
     }
 }
