@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('room_id')->references('id')->on('rooms');
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('room_id')->references('id')->on('rooms')->cascadeOnDelete();
             $table->unsignedInteger('adult_count');
             $table->unsignedInteger('children_count');
             $table->decimal('amount', 8, 2, true);

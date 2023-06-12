@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->decimal('taxes', 8, 2, true);
             $table->unsignedInteger('discount');
             $table->text("characteristics");
-            $table->foreignId('hotel_id')->references('id')->on('hotels');
+            $table->foreignId('hotel_id')->references('id')->on('hotels')->cascadeOnDelete();
             $table->timestamps();
         });
     }
