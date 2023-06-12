@@ -21,10 +21,10 @@ abstract class PaginateModel
             $limit = $request->limit;
             $page = $request->page;
             $skip = $limit * ($page - 1);
-            $response = $query->skip($skip)->limit($limit)->get();
+            $hotels = $query->skip($skip)->limit($limit)->get();
 
-            $query = [
-                "data" => $response,
+            $response = [
+                "data" => $hotels,
                 "pagination" => [
                     "total" => $total,
                     "current" => $page,
